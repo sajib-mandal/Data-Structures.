@@ -86,18 +86,18 @@ public class BinaryTree<T extends Comparable<T>> {
         bTree.add(70);
         bTree.add(65);
 
-        System.out.println("#### Inorder Traversal ####");
+        System.out.println("Inorder Traversal: ");
         List<Integer> inOrderList = new ArrayList<>();
         bTree.traverseInOrder(bTree.getRoot(), inOrderList);
         bTree.printList(inOrderList);
 
-        System.out.println("#### Pre Traversal ####");
+        System.out.println("Pre Traversal: ");
         List<Integer> preOrderList = new ArrayList<>();
         bTree.traversePreOrder(bTree.getRoot(), preOrderList);
         bTree.printList(preOrderList);
 
 
-        System.out.println("#### Post Traversal ####");
+        System.out.println("Post Traversal: ");
         List<Integer> postOrderList = new ArrayList<>();
         bTree.traversePostOrder(bTree.getRoot(), postOrderList);
         bTree.printList(postOrderList);
