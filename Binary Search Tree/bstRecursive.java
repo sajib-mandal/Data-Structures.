@@ -1,153 +1,189 @@
-class BST{ 
-    //node class that defines BST node
-    class Node { 
-        int key; 
+public class BinarySearchTree {
+    class Node{
+        int key;
+        Node parent;
         Node left;
-        Node right; 
-   
-        public Node(int data){ 
-            key = data; 
-            left = null;
-            right = null; 
-        } 
-    } 
-    // BST root node 
-    Node root; 
-  
-   // Constructor for BST =>initial empty tree
-    BST(){ 
-        root = null; 
-    } 
-    //delete a node from BST
-    void deleteKey(int key) { 
-        root = delete_Recursive(root, key); 
-    } 
-   
-    //recursive delete function
-    Node delete_Recursive(Node root, int key)  { 
-        //tree is empty
-        if (root == null)  return root; 
-   
-        //traverse the tree
-        if (key < root.key)     //traverse left subtree 
-            root.left = delete_Recursive(root.left, key); 
-        else if (key > root.key)  //traverse right subtree
-            root.right = delete_Recursive(root.right, key); 
-        else  { 
-            // node contains only one child
-            if (root.left == null) 
-                return root.right; 
-            else if (root.right == null) 
-                return root.left; 
-   
-            // node has two children; 
-            //get inorder successor (min value in the right subtree) 
-            root.key = minValue(root.right); 
-   
-            // Delete the inorder successor 
-            root.right = delete_Recursive(root.right, root.key); 
-        } 
-        return root; 
-    } 
-   
-    int minValue(Node root)  { 
-        //initially minval = root
-        int minval = root.key; 
-        //find minval
-        while (root.left != null)  { 
-            minval = root.left.key; 
-            root = root.left; 
-        } 
-        return minval; 
-    } 
-   
-    // insert a node in BST 
-    void insert(int key)  { 
-        root = insert_Recursive(root, key); 
-    } 
-   
-    //recursive insert function
-    Node insert_Recursive(Node root, int key) { 
-          //tree is empty
-        if (root == null) { 
-            root = new Node(key); 
-            return root; 
-        } 
-        //traverse the tree
-        if (key < root.key)     //insert in the left subtree
-            root.left = insert_Recursive(root.left, key); 
-        else if (key > root.key)    //insert in the right subtree
-            root.right = insert_Recursive(root.right, key); 
-          // return pointer
-        return root; 
-    } 
- 
-// method for inorder traversal of BST 
-    void inorder() { 
-        inorder_Recursive(root); 
-    } 
-   
-    // recursively traverse the BST  
-    void inorder_Recursive(Node root) { 
-        if (root != null) { 
-            inorder_Recursive(root.left); 
-            System.out.print(root.key + " "); 
-            inorder_Recursive(root.right); 
-        } 
-    } 
-     
-    boolean search(int key)  { 
-        root = search_Recursive(root, key); 
-        if (root!= null)
+        Node right;
+
+        Node(int data){
+            key = data;
+            parent = left = right = null;
+        }
+    }
+    Node root;
+
+    BinarySearchTree(){
+        root = null;
+    }
+
+    Node minimum(Node root){
+        while (root.left != null){
+            root = root.left;
+        }
+        return root;
+    }
+    Node maximum(Node root){
+        while (root.right != null){
+            root = root.right;
+        }
+        return root;
+    }
+    Node successor(Node x){
+        if (x.right != null){
+            return minimum(x.right);
+        }
+        Node y = x.parent;
+        while (y != null && y.right == x){
+            x = y;
+            y = y.parent;
+        }
+        return y;
+
+    }
+
+    Node predecessor(Node x){
+        if (x.left != null){
+            return maximum(x.left);
+        }
+        Node y = x.parent;
+        while (y != null && y.left == x){
+            x = y;
+            y = y.parent;
+        }
+        return y;
+    }
+    Node insert_recursive(Node root, int key){
+        if (root == null){
+            root = new Node(key);
+            return root;
+        }
+        if (key < root.key)
+            root.left = insert_recursive(root.left, key);
+        else if (key > root.key)
+            root.right = insert_recursive(root.right, key);
+        return root;
+    }
+
+    void insert(int key){
+        root = insert_recursive(root, key);
+    }
+
+    Node searchRecursive(Node root, int key){
+        if (root == null || root.key == key)
+            return root;
+        if (key < root.key)
+            return searchRecursive(root.left, key);
+        return searchRecursive(root.right, key);
+    }
+
+    boolean search(int key){
+        root = searchRecursive(root, key);
+        if (root != null)
             return true;
         else
             return false;
-    } 
-   
-    //recursive insert function
-    Node search_Recursive(Node root, int key)  { 
-        // Base Cases: root is null or key is present at root 
-        if (root==null || root.key==key) 
-            return root; 
-        // val is greater than root's key 
-        if (root.key > key) 
-            return search_Recursive(root.left, key); 
-        // val is less than root's key 
-        return search_Recursive(root.right, key); 
-    } 
+    }
+
+
+/*
+    Node searchTree(int key){
+        return searchRecursive(root, key);
+    }
+
+ */
+    Node deleteRecursive(Node root, int key){
+        if (root == null) return root;
+        else if(key < root.key)
+            root.left = deleteRecursive(root.left, key);
+        else if (key > root.key)
+            root.right = deleteRecursive(root.right, key);
+        else{
+            if (root.left == null && root.right == null){
+                root = null;
+            }
+            else if (root.left == null){
+                Node temp = root;
+                root = root.right;
+            }
+            else if(root.right == null){
+                Node temp = root;
+                root = root.left;
+            }
+
+            else{
+                Node temp = minimum(root.right);
+                root.key = temp.key;
+                root.right = deleteRecursive(root.right, temp.key);
+            }
+        }
+        return root;
+    }
+    void deleteKey(int key){
+        root = deleteRecursive(root, key);
+    }
+
+    void inorderRecursive(Node root){
+        if (root != null){
+            inorderRecursive(root.left);
+            System.out.println(root.key + " ");
+            inorderRecursive(root.right);
+        }
+    }
+    void inorder(){
+        inorderRecursive(root);
+    }
+
+    void preorderRecursive(Node root){
+        if (root != null){
+            System.out.println(root.key + " ");
+            preorderRecursive(root.left);
+            preorderRecursive(root.right);
+        }
+    }
+    void preorder(){
+        preorderRecursive(root);
+    }
+
+    void postorderRecursive(Node root){
+        if (root != null){
+            postorderRecursive(root.left);
+            postorderRecursive(root.right);
+            System.out.println(root.key + " ");
+        }
+    }
+    void postorder(){
+        postorderRecursive(root);
+    }
 }
+
 class Main{
-    public static void main(String[] args)  { 
-       //create a BST object
-        BST bst = new BST(); 
-        //insert data into BST
-        bst.insert(45); 
-        bst.insert(10); 
-        bst.insert(7); 
-        bst.insert(12); 
-        bst.insert(90); 
-        bst.insert(50); 
-        //print the BST
-        System.out.println("The BST Created with input data(Left-root-right):"); 
-        bst.inorder(); 
-        
-        //delete leaf node  
-        System.out.println("\nThe BST after Delete 12(leaf node):"); 
-        bst.deleteKey(12); 
-        bst.inorder(); 
-        //delete the node with one child
-        System.out.println("\nThe BST after Delete 90 (node with 1 child):"); 
-        bst.deleteKey(90); 
-        bst.inorder(); 
-                 
-        //delete node with two children  
-        System.out.println("\nThe BST after Delete 45 (Node with two children):"); 
-        bst.deleteKey(45); 
-        bst.inorder(); 
-        //search a key in the BST
-        boolean ret_val = bst.search (50);
-        System.out.println("\nKey 50 found in BST:" + ret_val );
-        ret_val = bst.search (12);
-        System.out.println("\nKey 12 found in BST:" + ret_val );
-     } 
+    public static void main(String[] args){
+        BinarySearchTree ob = new BinarySearchTree();
+        ob.insert(45);
+        ob.insert(10);
+        ob.insert(7);
+        ob.insert(12);
+        ob.insert(90);
+        ob.insert(50);
+
+        System.out.println("Inorder:");
+        ob.inorder();
+        System.out.println("Preorder");
+        ob.preorder();
+        System.out.println("Postorder");
+        ob.postorder();
+        System.out.println("delete 12: ");
+        ob.deleteKey(12);
+        ob.inorder();
+        System.out.println("delete 90: ");
+        ob.deleteKey(90);
+        ob.inorder();
+        System.out.println("delete 45: ");
+        ob.deleteKey(45);
+        ob.inorder();
+
+        boolean result = ob.search(50);
+        System.out.println("Element is present: " +result);
+        System.out.println("Element is present: " + ob.search(5));
+    }
 }
