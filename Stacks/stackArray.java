@@ -11,13 +11,13 @@ public class MyStack{
     }
 
     public int size(){
-        return size;
+        return size = top + 1;
     }
 
     public boolean isEmpty(){
         return size == 0;
     }
-
+/*
     public void push(int item) {
         // check for overflow
         if (top >= capacity - 1) {
@@ -30,10 +30,11 @@ public class MyStack{
         top = top + 1;
     }
 
-    /*
+ */
+
+
     public void push(int item){
-        if (size == capacity)
-        {
+        if (size == capacity){
             System.out.println("Stack overflow.");
             return;
         }
@@ -41,7 +42,7 @@ public class MyStack{
         top = top + 1;
     }
 
-     */
+
 
     void printStack(){
         for (int i = 0; i < capacity; i++)
@@ -54,6 +55,15 @@ public class MyStack{
 
         stack.push(22);
         stack.push(44);
+        stack.push(56);
+        stack.push(88);
+        stack.push(12);
+        stack.push(21);
+        stack.push(89);
+        stack.push(40);
+        stack.push(47);
+        stack.push(48);
         stack.printStack();
+        System.out.println("Stack size: " + stack.size());
     }
 }
