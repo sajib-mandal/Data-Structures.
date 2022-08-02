@@ -62,6 +62,26 @@ class MyLinkedList{
             node.next = next;
         }
     }
+    public int Front(){
+        if(isEmpty()){
+            System.out.println("List is empty.");
+            return -1;
+        }
+        return head.data;
+    }
+
+    public int Back(){
+        if (isEmpty()){
+            System.out.println("List is empty;");
+            return -1;
+        }else{
+            Node curr = head;
+            while (curr.next != null){
+                curr = curr.next;
+            }
+            return curr.data;
+        }
+    }
 
     public void print(){
         if(isEmpty()){
@@ -91,6 +111,12 @@ public class SinglyLinkedList {
         ob.insertAtBack(99);
         ob.insertAfter(5, 88);
         ob.print();
+        System.out.println("Front is: " + ob.Front());
+        System.out.println("Back is: " + ob.Back());
+        //ob.popFront();
+        System.out.println("Delete element first and get data: " + ob.Front());
+        ob.print();
+        System.out.println("Delete element Back and get data: " + ob.Back());
 
     }
 }
