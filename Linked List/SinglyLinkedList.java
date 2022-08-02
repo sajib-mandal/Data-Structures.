@@ -83,6 +83,23 @@ class MyLinkedList{
         }
     }
 
+    public int popBack(){
+        if(isEmpty()){
+            System.out.println("List is empty.");
+            return -1;
+        }
+        Node curr = head;
+        Node prev = null;
+        while (curr.next != null){
+            prev = curr;
+            curr = curr.next;
+        }
+        int item = curr.data;
+        prev.next = null;
+        //curr = null;
+        return item;
+    }
+
     public void print(){
         if(isEmpty()){
             System.out.println("Nothing to display.");
@@ -116,7 +133,10 @@ public class SinglyLinkedList {
         //ob.popFront();
         System.out.println("Delete element first and get data: " + ob.Front());
         ob.print();
-        System.out.println("Delete element Back and get data: " + ob.Back());
+        System.out.println("Delete element Back and get data: " + ob.popBack());
+        ob.print();
+        System.out.println("Delete element Back and get data: " + ob.popBack());
+        ob.print();
 
     }
 }
