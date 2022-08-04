@@ -1,7 +1,7 @@
 public class MaxHeap {
-    private int heap[];
+    private final int heap[];
     private int size;
-    private int maxsize;
+    private final int maxsize;
 
     MaxHeap(int maxsize){
         this.maxsize = maxsize;
@@ -21,21 +21,13 @@ public class MaxHeap {
         return 2*i + 2;
     }
 
-    // Returning true of given node is leaf
-    private boolean isLeaf(int i){
-        if (i > size/2 && i <= size){
-            return true;
-        }
-        return false;
-    }
-
     private void insert(int data){
         if (size >= maxsize){
             System.out.println("Sad heap is full.");
             return;
         }
         heap[size] = data;
-        size = size + 1;      // size++
+        size++; 
 
         int i = size - 1;
         while (i != 0 && heap[MaxHeap.parent(i)] < heap[i]){
@@ -72,7 +64,7 @@ public class MaxHeap {
         int maxElem = heap[0];
 
         heap[0] = heap[size -1];   // replace the first item with the last item
-        size = size - 1;  // size--
+        size--;
 
         maxHeapify(0);
         return maxElem;
