@@ -22,7 +22,7 @@ public class MaxHeap {
     }
 
     private void insert(int data){
-        if (size >= maxsize){
+        if (size >= maxsize){            // why not "maxSize - 1"??  Because size start 0. "this.size = 0".
             System.out.println("Sad heap is full.");
             return;
         }
