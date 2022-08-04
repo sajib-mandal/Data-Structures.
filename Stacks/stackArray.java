@@ -1,11 +1,12 @@
+
 public class MyStack{
     private int[] stack;
     private int size;
     private int capacity;
     private int top;
 
-    public MyStack(){
-        capacity = 10;
+    public MyStack(int c){
+        capacity = c;
         stack = new int[capacity];
         top = -1;
     }
@@ -19,7 +20,7 @@ public class MyStack{
     }
 
     public void push(int item){
-        if (top >= capacity - 1) {
+        if (top >= capacity-1) {
             System.out.println("Stack overflow.");
             return;
         }
@@ -30,7 +31,7 @@ public class MyStack{
     public int pop(){
         if(top <= -1){
             System.out.println("Stack Underflow.");
-            return -111;
+            return -1;
         }
         top = top - 1;
         return stack[top + 1];
@@ -39,7 +40,7 @@ public class MyStack{
     public int peek(){
         if (top <= -1){
             System.out.println("Stack Underflow.");
-            return -888;
+            return -1;
         }
         return stack[top];
     }
@@ -51,7 +52,7 @@ public class MyStack{
     }
 
     public static void main(String[] args){
-        MyStack stack = new MyStack();
+        MyStack stack = new MyStack(10);
 
         stack.push(22);
         stack.push(44);
@@ -64,6 +65,7 @@ public class MyStack{
         stack.push(47);
         stack.push(48);
         stack.push(66); // Stack Overflow.
+        stack.push(66);
 
         stack.printStack();
         System.out.println("\nSize is: " + stack.size());
