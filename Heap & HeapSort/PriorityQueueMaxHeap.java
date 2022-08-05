@@ -52,6 +52,7 @@ public class PriorityQueueHeap {
             int temp = heap[i];
             heap[i] = heap[largest];
             heap[largest] = temp;
+            maxHeapify(largeat);
         }
     }
 
