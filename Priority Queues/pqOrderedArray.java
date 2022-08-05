@@ -25,8 +25,8 @@ public class PriorityQueueOA {
     }
 
     private int dequeue(){
-        if (size == 0){
-            System.out.println("Queue is empty.");
+        if (size == 0){              // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
+            System.out.println("Sad Queue is empty.");
             return -1;
         }
         int item;
@@ -34,6 +34,15 @@ public class PriorityQueueOA {
         size--;
         return item;
     }
+
+    private int peek(){
+        if (size == 0){              // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
+            System.out.println("Queue is empty.");
+            return -1;
+        }
+        return queue[size - 1];
+    }
+
 
     private void print(){
         for (int i = 0; i < size; i++)
@@ -51,6 +60,7 @@ public class PriorityQueueOA {
         ob.enqueue(8);
         System.out.println("Array is: ");
         ob.print();
+        System.out.println("Peek highest priority: " + ob.peek());
         System.out.println("Dequeue is: " + ob.dequeue());
         ob.print();
     }
