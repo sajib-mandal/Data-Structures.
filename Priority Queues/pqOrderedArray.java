@@ -25,7 +25,7 @@ public class PriorityQueueOA {
     }
 
     private int dequeue(){
-        if (size == 0){              // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
+        if (size <= 0){    // (size == 0) also true.              // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
             System.out.println("Sad Queue is empty.");
             return -1;
         }
@@ -36,7 +36,7 @@ public class PriorityQueueOA {
     }
 
     private int peek(){
-        if (size == 0){              // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
+        if (size <= 0){   // (size == 0) also true.           // Warning! Not use (size < 0) 0r (size <= -1). Because it's give wrong answer.
             System.out.println("Queue is empty.");
             return -1;
         }
