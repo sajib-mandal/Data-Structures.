@@ -164,6 +164,15 @@ class Main{
         ob.insert(12);
         ob.insert(90);
         ob.insert(50);
+        
+        /* BST tree example
+              45 
+           /     \ 
+          10      90 
+         /  \    /   
+        7   12  50   
+        
+        */
 
         System.out.println("Inorder:");
         ob.inorder();
