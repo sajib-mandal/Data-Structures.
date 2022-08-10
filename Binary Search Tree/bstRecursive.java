@@ -85,12 +85,11 @@ public class BinarySearchTree {
     }
 
 
-/*
     Node searchTree(int key){
         return searchRecursive(root, key);
     }
 
- */
+ 
     Node deleteRecursive(Node root, int key){
         if (root == null) return root;
         else if(key < root.key)
