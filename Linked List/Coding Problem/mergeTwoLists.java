@@ -44,7 +44,7 @@ public class LinkedList {
         head1.next = new Node(2);
         head1.next.next = new Node(5);
 
-        Node head2 = new Node(1);
+        Node head2 = new Node(7);
         head2.next = new Node(3);
         head2.next.next = new Node(4);
 
